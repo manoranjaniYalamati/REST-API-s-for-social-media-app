@@ -11,13 +11,13 @@ import com.sri.prac.service.CommentService;
 
 
 @RestController
+@RequestMapping(value="/comment")
 public class CommentController {
 	@Autowired
 	CommentService commentService;
 	
-	
-	@RequestMapping(value="/comment", method=RequestMethod.POST)
-	public Comment comment(@RequestBody Comment comment){
-		return commentService.create(comment);
+	@RequestMapping(value="", method=RequestMethod.POST)
+	public Comment comment(@RequestBody Comment comment){				
+		return commentService.create(comment);							
 	}
 }

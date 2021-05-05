@@ -1,10 +1,13 @@
 package com.sri.prac.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,16 +23,15 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
-	public StatusRequest getJson(String request) {
-		StatusRequest status= new StatusRequest();
-		try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			status = objectMapper.readValue(request, StatusRequest.class);
-		}catch(IOException err) {
-			System.out.println(err);
-		}
-		return status;
+	public  ResponseEntity<Object> create(){
+		List<User> users = new ArrayList<>(); 
+		users.add(new User("sri","yalmati"));
+		users.add(new User("sai","kollati"));
+		users.add(new User("peter","williams"));
+		userRepository.saveAll(users);
+		return new ResponseEntity<>("Users Created Scuccesfully", HttpStatus.CREATED);
 	}
+	
 	
 	public User find(String id){
 		return userRepository.findById(id).orElseThrow();

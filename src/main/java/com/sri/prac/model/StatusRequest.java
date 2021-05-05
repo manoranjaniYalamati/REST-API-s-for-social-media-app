@@ -1,6 +1,6 @@
 package com.sri.prac.model;
 
-import org.springframework.web.multipart.MultipartFile;
+
 
 public class StatusRequest {
 	String title;
